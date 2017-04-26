@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  tools:context="name.zenochan.stickheaderdecoration.demo.MainActivity"
+  tools:showIn="@layout/activity_main"
+  >
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/rcv_content"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/right_side"
+    />
+
+  <name.zenochan.stickyheader.SideBar
+    android:id="@+id/right_side"
+    android:layout_width="20dp"
+    android:layout_height="match_parent"
+    app:layout_constraintRight_toRightOf="parent"
+    />
+
+</android.support.constraint.ConstraintLayout>
