@@ -8,7 +8,7 @@ repositories {
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  buildToolsVersion "25.0.3"
 
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -40,7 +40,7 @@ dependencies {
   testCompile 'junit:junit:4.12'
 
   provided 'com.android.support:design:25.3.1'
-  compile 'org.projectlombok:lombok:latest.integration'
+  provided 'org.projectlombok:lombok:latest.integration'
 }
 
 

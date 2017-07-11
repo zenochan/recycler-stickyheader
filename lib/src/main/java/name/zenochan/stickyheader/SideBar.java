@@ -109,29 +109,6 @@ public class SideBar extends View
         initIndex(adapter);
       }
 
-      @Override public void onItemRangeChanged(int positionStart, int itemCount, Object payload)
-      {
-        super.onItemRangeChanged(positionStart, itemCount, payload);
-        initIndex(adapter);
-      }
-
-      @Override public void onItemRangeInserted(int positionStart, int itemCount)
-      {
-        super.onItemRangeInserted(positionStart, itemCount);
-        initIndex(adapter);
-      }
-
-      @Override public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount)
-      {
-        super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-        initIndex(adapter);
-      }
-
-      @Override public void onItemRangeRemoved(int positionStart, int itemCount)
-      {
-        super.onItemRangeRemoved(positionStart, itemCount);
-        initIndex(adapter);
-      }
     });
     initIndex(adapter);
   }
@@ -168,9 +145,6 @@ public class SideBar extends View
     return true;
   }
 
-  /**
-   * 重写这个方法
-   */
   protected void onDraw(Canvas canvas)
   {
     super.onDraw(canvas);

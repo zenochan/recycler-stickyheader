@@ -25,7 +25,8 @@ import android.view.View;
  * @see <a href="http://www.jianshu.com/p/b46a4ff7c10a">RecyclerView之ItemDecoration由浅入深</a>
  * @since 2017/4/23
  */
-@SuppressWarnings("unused") public class StickyHeaderDecoration extends RecyclerView.ItemDecoration
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class StickyHeaderDecoration extends RecyclerView.ItemDecoration
 {
   private IndexProvider provider;
 
@@ -113,19 +114,24 @@ import android.view.View;
       View view     = parent.getChildAt(i);
       int  position = parent.getChildAdapterPosition(view);
 
+      // can't understand! sometimes position is -1
+      if (position < 0) continue;
+
       preGroupId = groupId;
-      groupId = groupId(provider.get(position));
+      String group = provider.get(position);
+      groupId = groupId(group);
       if (groupId < 0 || groupId == preGroupId) continue;
 
-      String textLine = provider.get(position).toUpperCase();
-      if (TextUtils.isEmpty(textLine)) continue;
+      if (TextUtils.isEmpty(group)) continue;
+      String textLine = group.toUpperCase();
 
       int   viewBottom = view.getBottom();
       float textY      = Math.max(headerHeight, view.getTop());
       if (position + 1 < itemCount) {
         //下一个和当前不一样移动当前
         long nextGroupId = groupId(provider.get(position + 1));
-        if (nextGroupId != groupId && viewBottom < textY) {//组内最后一个view进入了header
+        if (nextGroupId != groupId && viewBottom < textY) {
+          //组内最后一个view进入了header
           textY = viewBottom;
         }
       }
