@@ -1,14 +1,28 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'maven'
+
+apply from: 'http://maven.mjtown.cn/maven.gradle'
+mavenConf {
+  projectName "Sticky Header Decoration"
+  projectDesc "头部吸附"
+  projectUrl "https://github.com/zenochan/recycler-stickyheader/"
+
+  groupId "name.zeno"
+  artifactId "sticky-header"
+  version "1.0.0"
+
+//  repositoryUrl "file:///Users/zenochan/.m2/repository"
+  repositoryUrl "scp://root@121.43.123.201/root/nginx/maven"
+}
+confMaven()
 
 repositories {
   maven { url "https://jitpack.io" }
 }
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.3"
+  compileSdkVersion 27
+  buildToolsVersion "27.0.3"
 
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -17,13 +31,12 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     versionCode 1
-    versionName "1.0.0"
-
+    versionName mavenConf.version
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
   }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -39,68 +52,6 @@ dependencies {
   })
   testCompile 'junit:junit:4.12'
 
-  provided 'com.android.support:design:25.3.1'
-  provided 'org.projectlombok:lombok:latest.integration'
+  provided 'com.android.support:design:27.1.1'
 }
 
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file:///Users/zenochan/.m2/repository")
-
-      pom.groupId = "name.zeno"
-      pom.artifactId = 'sticky-header'
-      pom.version = android.defaultConfig.versionName
-
-      pom.project {
-        name 'Sticky Header Decoration'
-        packaging 'aar'
-        description 'zeno'
-        url 'https://github.com/zenochan/recycler-stickyheader'
-
-        scm {
-          url 'https://github.com/zenochan/recycler-stickyheader'
-          connection 'https://github.com/zenochan/recycler-stickyheader'
-          developerConnection 'https://github.com/zenochan/recycler-stickyheader'
-        }
-
-        licenses {
-          license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            distribution 'Apache-2.0'
-          }
-        }
-
-        developers {
-          developer {
-            id 'zenochan'
-            name 'Zeno Chan'
-            email '513500085@qq.com'
-          }
-        }
-      }
-    }
-  }
-}
-
-task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  failOnError false
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-artifacts {
-  archives javadocJar
-  archives sourcesJar
-}
